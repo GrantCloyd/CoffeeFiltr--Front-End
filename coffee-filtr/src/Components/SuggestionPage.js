@@ -1,5 +1,6 @@
 import React from 'react'
 import Coffee from "./Coffee";
+import { Grid } from "@material-ui/core"
 
 const SuggestionPage = () => {
     return (
@@ -12,9 +13,11 @@ const SuggestionPage = () => {
             </form>
 
             <h3>Suggested Coffee</h3>
-            <Coffee />
-            <Coffee />
-            <Coffee />
+            <Grid container spacing={3}>
+                <Coffee />
+                <Coffee />
+                <Coffee />
+            </Grid>
         </div>
     )
 }
