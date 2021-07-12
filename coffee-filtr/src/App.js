@@ -7,6 +7,8 @@ import SearchPage from "./Components/SearchPage";
 import SuggestionPage from "./Components/SuggestionPage";
 import FeedPage from "./Components/FeedPage";
 import BeveragePage from "./Components/BeveragePage";
+import LoginPage from "./Components/LoginPage"
+import SignUpPage from "./Components/SignUpPage"
 import Header from "./Components/Header";
 import Footer from "./Components/Footer";
 
@@ -22,6 +24,8 @@ function App() {
           <Route exact path="/suggestion" component={SuggestionPage} />
           <Route exact path="/feed" component={FeedPage} />
           <Route exact path="/beverage/:id" component={BeveragePage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/signup" component={SignUpPage} />
 
             {/* <Route exact path="/" component={() => <LandingPage viewed={viewed} />} />
             <Route exact path="/discover" component={DiscoverPage} />

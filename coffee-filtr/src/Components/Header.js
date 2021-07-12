@@ -10,6 +10,7 @@ const Header = () => {
                 <li><NavLink to="/suggestion">Make Your Own</NavLink></li>
                 <li><NavLink to="/feed">Feed</NavLink></li>
                 <li><NavLink to="/profile">Profile</NavLink></li>
+                <li><NavLink to="/login">Sign In</NavLink></li>
             </ul>
             <form>
                 <select>
