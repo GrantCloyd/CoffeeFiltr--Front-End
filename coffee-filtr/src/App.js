@@ -11,8 +11,15 @@ import LoginPage from "./Components/LoginPage"
 import SignUpPage from "./Components/SignUpPage"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
+import { useEffect } from "react"
 
 function App() {
+   useEffect(() => {
+      fetch("http://localhost:9393/beverages")
+      .then(response => response.json())
+      .then(console.log)
+   },[])
+
    return (
       <div className="App">
          <Header />
