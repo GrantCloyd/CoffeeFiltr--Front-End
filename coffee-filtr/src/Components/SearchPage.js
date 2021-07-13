@@ -4,7 +4,8 @@ import Coffee from "./Coffee"
 import { Grid } from "@material-ui/core"
 
 const SearchPage = () => {
-   const params = useParams()
+   const { query, type } = useParams()
+   console.log(query, type)
 
    return (
       <div>

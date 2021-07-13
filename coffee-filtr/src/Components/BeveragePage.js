@@ -1,9 +1,15 @@
-import React from "react"
+import React, { useState } from "react"
 import Review from "./Review"
 import { useParams } from "react-router-dom"
 
 function BeveragePage() {
    const coffeeId = useParams().id
+   const [newReview, setNewReview] = useState({
+      title: "",
+      content: "",
+      rating: 0,
+      username: "Anonymous",
+   })
 
    const { name, description, image, hot, ingredients, id } = {
       name: "Coffee",
@@ -33,10 +39,29 @@ function BeveragePage() {
          <Review />
          <hr />
          <h4>Add Review</h4>
-         <form onSubmit={e => e.preventDefault()}>
-            <input name="title" type="text" placeholder="Title" />
-            <input name="content" type="textarea" placeholder="Content" />
-            <select>
+         <form
+            onSubmit={e => {
+               e.preventDefault()
+               console.log(newReview)
+            }}>
+            <input
+               onChange={e => setNewReview({ ...newReview, title: e.target.value })}
+               value={newReview.title}
+               name="title"
+               type="text"
+               placeholder="Title"
+            />
+            <input
+               onChange={e => setNewReview({ ...newReview, content: e.target.value })}
+               value={newReview.content}
+               name="content"
+               type="textarea"
+               placeholder="Content"
+            />
+            <select
+               onChange={e => setNewReview({ ...newReview, rating: e.target.value })}
+               name="rating"
+               value={newReview.rating}>
                <option>0</option>
                <option>1</option>
                <option>2</option>

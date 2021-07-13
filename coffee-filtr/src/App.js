@@ -21,7 +21,7 @@ function App() {
             <Route exact path="/" component={DiscoverPage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/search" component={SearchPage} />
-            <Route exact path="/search(/:term)(/:type)" component={SearchPage} />
+            <Route exact path="/search/:type/:query" component={SearchPage} />
             <Route exact path="/suggestion" component={SuggestionPage} />
             <Route exact path="/feed" component={FeedPage} />
             <Route exact path="/beverage/:id" component={BeveragePage} />

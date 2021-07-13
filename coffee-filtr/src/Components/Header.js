@@ -1,8 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import { NavLink, useHistory } from "react-router-dom"
 
 const Header = () => {
    const history = useHistory()
+   const [query, setQuery] = useState("")
+   const [type, setType] = useState("All")
+
+   const handleQuery = e => {
+      setQuery(e.target.value)
+   }
 
    return (
       <div>
@@ -27,16 +33,25 @@ const Header = () => {
          <form
             onSubmit={e => {
                e.preventDefault()
-               history.push("/search")
+               history.push(`/search/${type}/${query}`)
             }}>
-            <select>
+            <select
+               onChange={e => {
+                  setType(e.target.value)
+                  console.log(type)
+               }}>
                <option>All</option>
                <option>Hot</option>
                <option>Cold</option>
                <option>Espresso</option>
                <option>Non-espresso</option>
             </select>
-            <input type="text" placeholder="Search coffee..." />
+            <input
+               value={query}
+               onChange={handleQuery}
+               type="text"
+               placeholder="Search coffee..."
+            />
             <button>Search</button>
          </form>
       </div>
