@@ -1,18 +1,28 @@
-import React from 'react'
-import Coffee from "./Coffee";
-import Recommended from "./Recommended";
+import React from "react"
+import Coffee from "./Coffee"
+import Recommended from "./Recommended"
+import { Grid } from "@material-ui/core"
 
-const DiscoverPage = () => {
-    return (
-        <div>
-              <h2>Home</h2>
-              <div>
-                <h3>Coffee of the Day</h3>
-                <Coffee />
-              </div>
-              <Recommended />
-        </div>
-    )
+const DiscoverPage = ({ coffeeData }) => {
+   const coffeeOfDay = coffeeData[Math.floor(Math.random() * coffeeData.length)]
+   console.log(coffeeOfDay)
+
+   let coffeeSuggestionsArr = []
+   coffeeSuggestionsArr = coffeeData.map(coffee => <Coffee data={coffee} />)
+
+   return (
+      <div>
+         <h2>Home</h2>
+         <div>
+            <h3>Coffee of the Day</h3>
+            <Coffee data={coffeeOfDay} />
+         </div>
+         <h3>Recommended Coffee</h3>
+         <Grid container spacing={3}>
+            {coffeeSuggestionsArr}
+         </Grid>
+      </div>
+   )
 }
 
-export default DiscoverPage;
+export default DiscoverPage

@@ -11,21 +11,24 @@ import LoginPage from "./Components/LoginPage"
 import SignUpPage from "./Components/SignUpPage"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 function App() {
+   const [coffeeData, setCoffeeData] = useState([])
+
    useEffect(() => {
       fetch("http://localhost:9393/beverages")
-      .then(response => response.json())
-      .then(console.log)
-   },[])
+         .then(response => response.json())
+         .then(setCoffeeData)
+      //console.log(coffeeData)
+   }, [])
 
    return (
       <div className="App">
          <Header />
          <Switch>
             {/* <ContextProvider> */}
-            <Route exact path="/" component={DiscoverPage} />
+            <Route exact path="/" component={() => <DiscoverPage coffeeData={coffeeData} />} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/search" component={SearchPage} />
             <Route exact path="/search/:type/:query" component={SearchPage} />
