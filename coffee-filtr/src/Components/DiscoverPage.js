@@ -1,9 +1,18 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Coffee from "./Coffee"
 import Recommended from "./Recommended"
 import { Grid } from "@material-ui/core"
 
-const DiscoverPage = ({ coffeeData }) => {
+const DiscoverPage = () => {
+   const [coffeeData, setCoffeeData] = useState([])
+
+   useEffect(() => {
+      fetch("http://localhost:9393/thumbnail_data")
+         .then(response => response.json())
+         .then(setCoffeeData)
+      //console.log(coffeeData)
+   }, [])
+
    const randomizer = () => Math.floor(Math.random() * coffeeData.length)
    const coffeeOfDay = coffeeData[randomizer()]
 
