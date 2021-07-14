@@ -4,8 +4,8 @@ import Recommended from "./Recommended"
 import { Grid } from "@material-ui/core"
 
 const DiscoverPage = ({ coffeeData }) => {
-   const coffeeOfDay = coffeeData[Math.floor(Math.random() * coffeeData.length)]
-   console.log(coffeeOfDay)
+   const randomizer = () => Math.floor(Math.random() * coffeeData.length)
+   const coffeeOfDay = coffeeData[randomizer()]
 
    let coffeeSuggestionsArr = coffeeData.map(coffee => <Coffee data={coffee} />)
 
@@ -18,7 +18,11 @@ const DiscoverPage = ({ coffeeData }) => {
          </div>
          <h3>Recommended Coffee</h3>
          <Grid container spacing={3}>
-            {coffeeSuggestionsArr}
+            {[
+               coffeeSuggestionsArr[randomizer()],
+               coffeeSuggestionsArr[randomizer()],
+               coffeeSuggestionsArr[randomizer()],
+            ]}
          </Grid>
       </div>
    )
