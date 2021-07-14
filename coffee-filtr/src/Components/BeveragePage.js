@@ -1,31 +1,83 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import Review from "./Review"
 import { useParams } from "react-router-dom"
+import { GlobalContext } from '../Context/GlobalState'
 
 function BeveragePage() {
    const coffeeId = useParams().id
+
+   const { beverages, updateBeverages } = useContext(GlobalContext)
+
+   let beverage = [];
+
+   if (beverages.length !== 0) {
+      beverage = beverages[0].find(bev => {
+         return bev.id === +coffeeId
+      })
+   }
+
    const [newReview, setNewReview] = useState({
       title: "",
       content: "",
       rating: 0,
-      username: "Anonymous",
+      user_id: 1,
+      beverage_id: coffeeId
    })
 
-   const { name, description, image, hot, ingredients, id } = {
-      name: "Coffee",
-      description: "This is a hot cup of coffee",
-      image: "https://cstpdx.com/sites/clinton/files/black%20coffee.jpg",
-      ingredients: ["Coffee", "Sugar", "Water"],
-      hot: true,
-      id: 1,
+   let { title, description, img_url, hot, ingredients, reviews} = {
+      title: "",
+      description: "",
+      img_url: "",
+      hot: false,
+      ingredients: [],
+      reviews: []
+   }
+
+   let reviewsArr = [];
+
+   if (beverage !== undefined && beverage.length !== 0) {
+      title = beverage.title
+      description = beverage.description
+      img_url = beverage.img_url
+      hot = beverage.hot
+      ingredients = beverage.ingredients
+      reviews = beverage.reviews
+
+      reviewsArr = reviews.map(review => {
+         return (
+            <Review
+               key={review.id}
+               review={review}
+            />
+         )
+      })
+      }
+
+   const handleSubmitReview = e => {
+      e.preventDefault()
+
+      fetch("http://localhost:9393/reviews", {
+         method: "POST",
+         headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(newReview)
+    })
+      .then(response => response.json())
+      .then(json => {
+         const updatedBeverage = {...beverage, reviews: [...reviews, json]}
+
+         updateBeverages(updatedBeverage)
+      })
    }
 
    return (
       <div>
-         <h2>{name}</h2>
-         <img src={image} />
+         <h2>{title}</h2>
+         <img src={img_url} />
          <p>{description}</p>
-         <p>Ingredients: {ingredients.join(", ")}</p>
+         <p>Ingredients: {ingredients.map(ing => ing.name).join(", ")}</p>
          <p>{hot ? "Hot!🔥" : "Cold 🧊"}</p>
          <button>Add Favorite!</button>
          <ul>
@@ -35,15 +87,11 @@ function BeveragePage() {
          </ul>
          <hr />
          <h4>Reviews</h4>
-         <Review />
-         <Review />
+         {reviewsArr}
          <hr />
          <h4>Add Review</h4>
          <form
-            onSubmit={e => {
-               e.preventDefault()
-               console.log(newReview)
-            }}>
+            onSubmit={handleSubmitReview}>
             <input
                onChange={e => setNewReview({ ...newReview, title: e.target.value })}
                value={newReview.title}

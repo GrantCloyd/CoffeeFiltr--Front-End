@@ -10,13 +10,16 @@ const DiscoverPage = () => {
       fetch("http://localhost:9393/thumbnail_data")
          .then(response => response.json())
          .then(setCoffeeData)
-      //console.log(coffeeData)
    }, [])
 
    const randomizer = () => Math.floor(Math.random() * coffeeData.length)
    const coffeeOfDay = coffeeData[randomizer()]
 
-   let coffeeSuggestionsArr = coffeeData.map(coffee => <Coffee data={coffee} />)
+   let coffeeSuggestionsArr = [];
+
+   if (coffeeData.length !== 0) {
+      coffeeSuggestionsArr = coffeeData.map(coffee => <Coffee key={coffee.title} data={coffee} />)
+   }
 
    return (
       <div>

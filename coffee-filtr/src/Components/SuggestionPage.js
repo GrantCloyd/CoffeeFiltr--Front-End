@@ -36,13 +36,13 @@ const SuggestionPage = () => {
          <h2>Make Your Own Coffee</h2>
          <h3>What Ingredients do you Have?</h3>
          <form onSubmit={e => e.preventDefault()}>
-            <label for="coffee"> Coffee </label>
+            <label htmlFor="coffee"> Coffee </label>
             <input type="checkbox" id="coffee" value="coffee" name="coffee" />
-            <label for="sugar"> Sugar </label>
+            <label htmlFor="sugar"> Sugar </label>
             <input type="checkbox" id="sugar" value="sugar" name="sugar" />
-            <label for="milk"> Milk </label>
+            <label htmlFor="milk"> Milk </label>
             <input type="checkbox" id="milk" value="milk" name="milk" />
-            <label for="lemon"> Lemon</label>
+            <label htmlFor="lemon"> Lemon</label>
             <input type="checkbox" id="lemon" value="lemon" name="lemon" />
             <button>What can I make?</button>
          </form>
@@ -83,13 +83,13 @@ const SuggestionPage = () => {
             />
             <select
                onChange={handleNewCoffeeIngredient}
-               value={newCoffee.ingredients}
+               // value={newCoffee.ingredients}
                name="ingredients">
                <option>Ingredient 1</option>
                <option>Ingredient 2</option>
             </select>
             {/* Add each item when clicked to a single list to cut down on space with checkboxes */}
-            <label for="hot">Hot?</label>
+            <label htmlFor="hot">Hot?</label>
             <input
                onChange={handleNewCoffeeCheck}
                value={newCoffee.hot}

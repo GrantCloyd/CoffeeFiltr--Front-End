@@ -3,8 +3,6 @@ import { Link } from "react-router-dom"
 import { Card, CardContent, Grid } from "@material-ui/core"
 
 const Coffee = ({ data }) => {
-   // console.log(data.data["title"])
-
    let title = "Coffee"
    let img_url = "https://cstpdx.com/sites/clinton/files/black%20coffee.jpg"
    let id = 1

@@ -33,7 +33,12 @@ const Header = () => {
          <form
             onSubmit={e => {
                e.preventDefault()
-               history.push(`/search/${type}/${query}`)
+               if (!query) {
+                  history.push(`/search/${type}/All`)
+               }
+               else {
+                  history.push(`/search/${type}/${query}`)
+               }
             }}>
             <select
                onChange={e => {
