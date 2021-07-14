@@ -7,8 +7,7 @@ const DiscoverPage = ({ coffeeData }) => {
    const coffeeOfDay = coffeeData[Math.floor(Math.random() * coffeeData.length)]
    console.log(coffeeOfDay)
 
-   let coffeeSuggestionsArr = []
-   coffeeSuggestionsArr = coffeeData.map(coffee => <Coffee data={coffee} />)
+   let coffeeSuggestionsArr = coffeeData.map(coffee => <Coffee data={coffee} />)
 
    return (
       <div>
