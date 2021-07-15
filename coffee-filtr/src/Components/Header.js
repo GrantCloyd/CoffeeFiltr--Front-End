@@ -17,7 +17,7 @@ const Header = () => {
    return (
       <header className="header">
          <h1>CoffeeFiltr</h1>
-         <ul>
+         <ul className="header-ul">
             <li>
                <NavLink to="/">Home</NavLink>
             </li>
@@ -32,6 +32,7 @@ const Header = () => {
                   <NavLink to="/profile">Profile</NavLink>
                </li>
             ) : null}
+            <br />
             <li>
                {user.id !== "guest" ? (
                   <Button

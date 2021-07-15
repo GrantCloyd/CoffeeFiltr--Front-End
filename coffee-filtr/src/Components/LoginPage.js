@@ -31,24 +31,31 @@ const LoginPage = () => {
 
    return (
       <div>
-         <form
+         <br />
+         <br />
+
+         <form className="signup-form"
             onSubmit={e => {
                handleSubmitLogin(e)
             }}>
+            <label>Username</label>
             <input
                onChange={handleSignIn}
                value={signIn.username}
                name="username"
                type="text"
-               placeholder="Username"
+               placeholder="Enter Username ..."
             />
+            <br />
+            <label>Password</label>
             <input
                onChange={handleSignIn}
                value={signIn.password}
                name="password"
                type="password"
-               placeholder="Password"
+               placeholder="Enter Password ..."
             />
+            <br />
             <Button type="submit" color="primary" variant="contained">
                Login
             </Button>

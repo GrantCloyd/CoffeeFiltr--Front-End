@@ -27,12 +27,13 @@ const ProfilePage = () => {
    }
 
    return (
-      <div>
+      <div className="bottom-div">
          <h2>Dashboard</h2>
          <img className="avatar" alt="User Avatar" src={user.avatar} />
          {isToggled ? (
-            <form onSubmit={submitUpdate}>
-               <ul>
+            <form  onSubmit={submitUpdate}>
+               <ul className="signup-form">
+                  <br />
                   <li>
                      Username: &nbsp;
                      <input
@@ -43,6 +44,7 @@ const ProfilePage = () => {
                         value={updateUser.username}
                      />
                   </li>
+                  <br />
                   <li>
                      First Name: &nbsp;
                      <input
@@ -53,6 +55,7 @@ const ProfilePage = () => {
                         value={updateUser.first_name}
                      />
                   </li>
+                  <br />
                   <li>
                      Last Name: &nbsp;
                      <input
@@ -63,6 +66,7 @@ const ProfilePage = () => {
                         value={updateUser.last_name}
                      />
                   </li>
+                  <br />
                   <li>
                      Email: &nbsp;
                      <input
@@ -73,8 +77,9 @@ const ProfilePage = () => {
                         value={updateUser.email}
                      />
                   </li>
+                  <br />
                   <li>
-                     Bio: &nbsp;
+                     Biography: &nbsp;
                      <input
                         onChange={handleUpdates}
                         name="bio"
@@ -83,6 +88,7 @@ const ProfilePage = () => {
                         value={updateUser.bio}
                      />
                   </li>
+                  <br />
                   <li>
                      Password: &nbsp;
                      <input
@@ -93,6 +99,7 @@ const ProfilePage = () => {
                         value={updateUser.password}
                      />
                   </li>
+                  <br />
                   <li>
                      Avatar: &nbsp;
                      <input
@@ -104,18 +111,24 @@ const ProfilePage = () => {
                      />
                   </li>
                </ul>
+               <br />
                <Button type="submit" color="primary" variant="contained">
                   Submit Changes
                </Button>
             </form>
          ) : (
-            <ul>
-               <li>Username: {username}</li>
-               <li>Name : {first_name + " " + last_name}</li>
-               <li>Email : {email}</li>
-               <li>About Me : {bio}</li>
+            <ul className="signup-form-2">
+               <br />
+               <li><strong>Username:</strong> {username}</li>
+               <br />
+               <li><strong>Name :</strong> {first_name + " " + last_name}</li>
+               <br />
+               <li><strong>Email :</strong> {email}</li>
+               <br />
+               <li><strong>About Me :</strong> {bio}</li>
             </ul>
          )}
+         <br />
          <Button color="primary" variant="contained" onClick={() => setToggle(!isToggled)}>
             {isToggled ? "Cancel Edit" : "Edit Profile"}{" "}
          </Button>

@@ -35,46 +35,58 @@ const SignUpPage = () => {
    }
 
    return (
-      <div>
-         <form onSubmit={handleNewUser}>
+      <div className="bottom-div">
+         <form className="signup-form" onSubmit={handleNewUser}>
+            <br />
+            <label htmlFor="username">Username</label>
             <input
                value={newSignUp.username}
                onChange={handleSignUp}
                name="username"
                type="text"
-               placeholder="Username"
+               placeholder="Enter Username ..."
             />
+            <br />
+            <label htmlFor="first_name">First Name</label>
             <input
                value={newSignUp.first_name}
                onChange={handleSignUp}
                name="first_name"
                type="text"
-               placeholder="First name"
+               placeholder="Enter First Name ..."
             />
+            <br />
+            <label htmlFor="last_name">Last Name</label>
             <input
                value={newSignUp.last_name}
                onChange={handleSignUp}
                name="last_name"
                type="text"
-               placeholder="Last name"
+               placeholder="Enter Last Name ..."
             />
+            <br />
+            <label htmlFor="email">Email</label>
             <input
                value={newSignUp.email}
                onChange={handleSignUp}
                name="email"
                type="text"
-               placeholder="Email"
+               placeholder="Enter Email ..."
             />
+            <br />
+            <label htmlFor="password">Password</label>
             <input
                value={newSignUp.password}
                onChange={handleSignUp}
                name="password"
                type="password"
-               placeholder="Password"
+               placeholder="Enter Password ..."
             />
+            <br />
             <Button type="submit" color="primary" variant="contained">
                Sign Up
             </Button>
+            <br />
          </form>
       </div>
    )

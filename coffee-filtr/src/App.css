@@ -2,6 +2,8 @@
    margin: 0;
    text-align: center;
    align-content: center;
+   position: relative;
+   min-height: 100vh;
 }
 
 .App-link {
@@ -28,7 +30,7 @@ img.avatar {
 
 .header {
    padding-top: 10px;
-   padding-bottom: 10px;
+   padding-bottom: 20px;
    background-image: url("https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
    background-position: center;
    opacity: 0.8;
@@ -36,11 +38,73 @@ img.avatar {
 
 .footer {
    padding-top: 10px;
-   padding-bottom: 10px;
    background-image: url("https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
    background-position: center;
    opacity: 0.8;
    width: 100%;
-   position: relative;
+   position: absolute;
    bottom: 0;
 }
+
+.bottom-div, .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 {
+   padding-top: 30px;
+   padding-bottom: 8%;
+}
+
+#COTD {
+   display: flex;
+   justify-content: center;
+}
+
+.signup-form, .checkbox {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width:200px;
+   margin: 0 auto;
+}
+
+.signup-form-2 {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width:300px;
+   margin: 0 auto;
+}
+
+label {
+   padding-bottom: 5px;
+}
+
+select {
+   padding: 9px 9px;
+   border: none;
+   border:solid 1px #ccc;
+   border-radius: 2px;
+}
+
+input {
+   padding: 10px 9px;
+   border: none;
+   border:solid 1px #ccc;
+   border-radius: 2px;
+}
+
+.signup-form li input {
+   margin-top: 5px;
+}
+
+ul {
+   padding: 0;
+    list-style-type: none;
+}
+
+.header-ul {
+   display: flex;
+   width: 40%;
+   margin: 0 auto;
+   margin-bottom: 20px;
+   justify-content: space-between;
+}
+
+

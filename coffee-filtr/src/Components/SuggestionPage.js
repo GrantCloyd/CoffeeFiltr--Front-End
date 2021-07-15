@@ -87,7 +87,7 @@ const SuggestionPage = () => {
    }
 
    return (
-      <div>
+      <div className="bottom-div">
          <h2>Make Your Own Coffee</h2>
          <h3>What Ingredients do you Have?</h3>
          <form
@@ -112,43 +112,52 @@ const SuggestionPage = () => {
          </Grid>
 
          <h3>Add a coffee</h3>
-         <form onSubmit={submitCoffee}>
+         <form className="signup-form" onSubmit={submitCoffee}>
+            <label htmlFor="title">Title</label>
             <input
                onChange={handleNewCoffee}
                value={newCoffee.title}
                type="text"
                name="title"
-               placeholder="title"
+               placeholder="Enter Title ..."
             />
+            <br />
+            <label htmlFor="description">Description</label>
             <input
                onChange={handleNewCoffee}
                value={newCoffee.description}
                type="textarea"
                name="description"
-               placeholder="description"
+               placeholder="Enter Description ..."
             />
+             <br />
+            <label htmlFor="img_url">Image</label>
             <input
                onChange={handleNewCoffee}
                value={newCoffee.img_url}
                type="text"
                name="img_url"
-               placeholder="image"
+               placeholder="Enter Image ..."
             />
+             <br />
+            <label htmlFor="ingredients">Ingredients</label>
             <select
                onChange={handleNewCoffeeIngredient}
                // value={newCoffee.ingredients}
                name="ingredients">
                {ingredientsArr}
             </select>
-            {/* Add each item when clicked to a single list to cut down on space with checkboxes */}
+            <br />
             <label htmlFor="hot">Hot?</label>
-            <input
+            <input 
+               className="checkbox"
                onChange={handleNewCoffeeCheck}
                value={newCoffee.hot}
                type="checkbox"
                name="hot"
                id="hot"
             />
+            <br />
             <Button type="submit" color="primary" variant="contained">
                Submit
             </Button>

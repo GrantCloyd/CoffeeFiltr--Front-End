@@ -28,8 +28,8 @@ const DiscoverPage = () => {
       <div>
          {user.id !== "guest" ? <h3>Welcome, {user.username}</h3> : <h3>Welcome!</h3>}
          <h2>Home</h2>
-         <div>
-            <h3>Coffee of the Day</h3>
+         <h3>Coffee of the Day</h3>
+         <div id="COTD">
             <Coffee data={coffeeOfDay} />
          </div>
          <h3>Recommended Coffee</h3>
