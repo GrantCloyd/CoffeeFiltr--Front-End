@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import Coffee from "./Coffee"
 import { Grid } from "@material-ui/core"
+import { GlobalContext } from "../Context/GlobalState"
 
 const SuggestionPage = () => {
-   //might need to make a separate state for ease of fetch post for ingredients (set components?)
+   const { beverages, addBeverage } = useContext(GlobalContext)
+   const [ingredients, setIngredients] = useState([])
+   const [suggestCoffeeIng, setSuggestCoffeeIng] = useState([])
    const [newCoffee, setNewCoffee] = useState({
       title: "",
       description: "",
@@ -12,11 +15,43 @@ const SuggestionPage = () => {
       hot: true,
    })
 
+   useEffect(() => {
+      fetch("http://localhost:9393/ingredients")
+         .then(r => r.json())
+         .then(setIngredients)
+   }, [])
+
+   let ingredientsArr = ingredients.map(ing => <option key={ing.id}>{ing.name}</option>)
+
+   //might need to make a separate state for ease of fetch post for ingredients (set components?)
+
+   const suggestedBevArr = beverages[0].filter(bev =>
+      bev.ingredients.every(i => {
+         return suggestCoffeeIng.includes(i.name)
+      })
+   )
+
+   let suggestedCoffeeCards = suggestedBevArr.map(bev => <Coffee key={bev.id} data={bev} />)
+
    function removeCoffeeIng(ingr) {
       setNewCoffee({
          ...newCoffee,
          ingredients: newCoffee.ingredients.filter(ingredient => ingredient !== ingr),
       })
+   }
+
+   function removeSuggestIng(ingred) {
+      setSuggestCoffeeIng(suggestCoffeeIng.filter(ing => ing !== ingred))
+   }
+
+   const suggestIngredArr = suggestCoffeeIng.map(ing => (
+      <li onClick={() => removeSuggestIng(ing)} key={ing}>
+         {ing}
+      </li>
+   ))
+
+   function handleNewSuggestIngredient(e) {
+      setSuggestCoffeeIng([...suggestCoffeeIng, e.target.value])
    }
 
    const ingredArr = newCoffee.ingredients.map(ing => (
@@ -31,35 +66,52 @@ const SuggestionPage = () => {
    const handleNewCoffeeCheck = e =>
       setNewCoffee({ ...newCoffee, [e.target.name]: e.target.checked })
 
+   const submitCoffee = e => {
+      e.preventDefault()
+
+      let configObj = {
+         method: "POST",
+         headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+         },
+         body: JSON.stringify(newCoffee),
+      }
+      console.log(newCoffee)
+      console.log(configObj)
+
+      fetch("http://localhost:9393/beverages_post", configObj)
+         .then(response => response.json())
+         .then(addBeverage)
+   }
+
    return (
       <div>
          <h2>Make Your Own Coffee</h2>
          <h3>What Ingredients do you Have?</h3>
-         <form onSubmit={e => e.preventDefault()}>
-            <label htmlFor="coffee"> Coffee </label>
-            <input type="checkbox" id="coffee" value="coffee" name="coffee" />
-            <label htmlFor="sugar"> Sugar </label>
-            <input type="checkbox" id="sugar" value="sugar" name="sugar" />
-            <label htmlFor="milk"> Milk </label>
-            <input type="checkbox" id="milk" value="milk" name="milk" />
-            <label htmlFor="lemon"> Lemon</label>
-            <input type="checkbox" id="lemon" value="lemon" name="lemon" />
-            <button>What can I make?</button>
-         </form>
-
-         <h3>Suggested Coffee</h3>
-         <Grid container spacing={3}>
-            <Coffee />
-            <Coffee />
-            <Coffee />
-         </Grid>
-
-         <h3>Add a coffee</h3>
          <form
             onSubmit={e => {
                e.preventDefault()
-               console.log(newCoffee)
+               console.log(suggestCoffeeIng)
             }}>
+            <select
+               onChange={handleNewSuggestIngredient}
+               // value={newCoffee.ingredients}
+               name="ingredients">
+               {ingredientsArr}
+            </select>
+
+            {/* <button>What can I make?</button> */}
+         </form>
+         <ul>{suggestIngredArr}</ul>
+
+         <h3>Suggested Coffee</h3>
+         <Grid container spacing={3}>
+            {suggestedCoffeeCards}
+         </Grid>
+
+         <h3>Add a coffee</h3>
+         <form onSubmit={submitCoffee}>
             <input
                onChange={handleNewCoffee}
                value={newCoffee.title}
@@ -85,8 +137,7 @@ const SuggestionPage = () => {
                onChange={handleNewCoffeeIngredient}
                // value={newCoffee.ingredients}
                name="ingredients">
-               <option>Ingredient 1</option>
-               <option>Ingredient 2</option>
+               {ingredientsArr}
             </select>
             {/* Add each item when clicked to a single list to cut down on space with checkboxes */}
             <label htmlFor="hot">Hot?</label>
