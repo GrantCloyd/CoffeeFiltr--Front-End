@@ -56,14 +56,15 @@ const SearchPage = () => {
 
       console.log(result)
       const uniqueArray = result.flat().reduce((filter, current) => {
-         let dk = filter.find(item => item.title === current.title)
+         let dk = filter.find(item => item.name === current.name)
          if (!dk) {
             return filter.concat([current])
          } else {
             return filter
          }
-      })
+      }, [])
 
+      console.log(uniqueArray)
       let filtered = uniqueArray.map(item => <Coffee key={item.id} data={item} />)
 
       setFilteredArr(filtered)
