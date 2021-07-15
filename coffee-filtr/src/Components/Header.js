@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react"
 import { NavLink, useHistory } from "react-router-dom"
 import { GlobalContext } from "../Context/GlobalState"
+import { Button } from "@material-ui/core"
 
 const Header = () => {
    const history = useHistory()
@@ -14,7 +15,7 @@ const Header = () => {
    }
 
    return (
-      <div>
+      <header className="header">
          <h1>CoffeeFiltr</h1>
          <ul>
             <li>
@@ -26,14 +27,26 @@ const Header = () => {
             <li>
                <NavLink to="/feed">Feed</NavLink>
             </li>
-            {user.id !== "guest" ? <li>
-               <NavLink to="/profile">Profile</NavLink>
-            </li> : null}
+            {user.id !== "guest" ? (
+               <li>
+                  <NavLink to="/profile">Profile</NavLink>
+               </li>
+            ) : null}
             <li>
-               {user.id !== "guest" ? <button onClick={() => {
-                  changeUser({ id: "guest" })
-                  history.push("/")
-               }}>Sign Out</button> : <NavLink to="/login">Sign In</NavLink>}
+               {user.id !== "guest" ? (
+                  <Button
+                     type="submit"
+                     color="primary"
+                     variant="contained"
+                     onClick={() => {
+                        changeUser({ id: "guest" })
+                        history.push("/")
+                     }}>
+                     Sign Out
+                  </Button>
+               ) : (
+                  <NavLink to="/login">Sign In</NavLink>
+               )}
             </li>
          </ul>
          <form
@@ -63,9 +76,11 @@ const Header = () => {
                placeholder="Search coffee..."
             />
 
-            <button>Search</button>
+            <Button type="submit" variant="contained" color="primary">
+               Search
+            </Button>
          </form>
-      </div>
+      </header>
    )
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import { useHistory } from "react-router-dom"
+import { Button } from "@material-ui/core"
 
 const SignUpPage = () => {
    const [newSignUp, setNewSignUp] = useState({
@@ -19,24 +20,23 @@ const SignUpPage = () => {
    const handleNewUser = e => {
       e.preventDefault()
 
-      fetch("http://localhost:9393/users",{
+      fetch("http://localhost:9393/users", {
          method: "POST",
          headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            Accept: "application/json",
          },
-         body: JSON.stringify(newSignUp)
+         body: JSON.stringify(newSignUp),
       })
-      .then(response => response.json())
-      .then(output => {
-         history.push("/login")
-      })
+         .then(response => response.json())
+         .then(output => {
+            history.push("/login")
+         })
    }
 
    return (
       <div>
-         <form
-            onSubmit={handleNewUser}>
+         <form onSubmit={handleNewUser}>
             <input
                value={newSignUp.username}
                onChange={handleSignUp}
@@ -72,7 +72,9 @@ const SignUpPage = () => {
                type="password"
                placeholder="Password"
             />
-            <input type="submit" value="Sign up" />
+            <Button type="submit" color="primary" variant="contained">
+               Sign Up
+            </Button>
          </form>
       </div>
    )

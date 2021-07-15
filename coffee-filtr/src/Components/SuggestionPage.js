@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from "react"
 import Coffee from "./Coffee"
 import { Grid } from "@material-ui/core"
 import { GlobalContext } from "../Context/GlobalState"
+import { Button } from "@material-ui/core"
 
 const SuggestionPage = () => {
    const { beverages, addBeverage } = useContext(GlobalContext)
@@ -148,7 +149,9 @@ const SuggestionPage = () => {
                name="hot"
                id="hot"
             />
-            <button>Submit</button>
+            <Button type="submit" color="primary" variant="contained">
+               Submit
+            </Button>
          </form>
          <ul>{ingredArr}</ul>
       </div>
