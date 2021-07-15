@@ -54,6 +54,7 @@ const SearchPage = () => {
          result = [...result, update]
       }
 
+      console.log(result)
       const uniqueArray = result.flat().reduce((filter, current) => {
          let dk = filter.find(item => item.title === current.title)
          if (!dk) {
@@ -61,7 +62,7 @@ const SearchPage = () => {
          } else {
             return filter
          }
-      }, [])
+      })
 
       let filtered = uniqueArray.map(item => <Coffee key={item.id} data={item} />)
 
