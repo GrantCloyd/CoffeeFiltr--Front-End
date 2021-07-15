@@ -56,7 +56,7 @@ const SearchPage = () => {
 
       console.log(result)
       const uniqueArray = result.flat().reduce((filter, current) => {
-         let dk = filter.find(item => item.name === current.name)
+         let dk = filter.find(item => item.title === current.title)
          if (!dk) {
             return filter.concat([current])
          } else {
@@ -84,7 +84,7 @@ const SearchPage = () => {
          <span>Filter by:</span>
          <label htmlFor="sweet"> Sweet </label>
          <input
-            onClick={() => filterByOption(["Sugar", "Chocolate", "Whipped-Cream"])}
+            onClick={() => filterByOption(["Sugar", "Chocolate", "Icecream", "Whipped-Cream"])}
             type="checkbox"
             id="sweet"
             value="sweet"
