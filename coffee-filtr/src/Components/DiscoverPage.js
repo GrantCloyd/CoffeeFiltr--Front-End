@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import Coffee from "./Coffee"
 import Recommended from "./Recommended"
 import { Grid } from "@material-ui/core"
+import { GlobalContext } from "../Context/GlobalState"
 
 const DiscoverPage = () => {
    const [coffeeData, setCoffeeData] = useState([])
+
+   const { user } = useContext(GlobalContext)
 
    useEffect(() => {
       fetch("http://localhost:9393/thumbnail_data")
@@ -23,6 +26,7 @@ const DiscoverPage = () => {
 
    return (
       <div>
+         {user.id !== "guest" ? <h3>Welcome, {user.username}</h3> : <h3>Welcome!</h3>}
          <h2>Home</h2>
          <div>
             <h3>Coffee of the Day</h3>

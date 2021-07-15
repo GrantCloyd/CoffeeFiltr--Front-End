@@ -22,6 +22,11 @@ export default (state, action) => {
             ...state,
             beverages: [...state.beverages, action.payload],
          }
+      case "CHANGE_USER":
+         return {
+            ...state,
+            user: action.payload
+         }
       default:
          return state
 

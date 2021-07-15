@@ -1,10 +1,13 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
 import { NavLink, useHistory } from "react-router-dom"
+import { GlobalContext } from "../Context/GlobalState"
 
 const Header = () => {
    const history = useHistory()
    const [query, setQuery] = useState("")
    const [type, setType] = useState("All")
+
+   const { user, changeUser } = useContext(GlobalContext)
 
    const handleQuery = e => {
       setQuery(e.target.value)
@@ -23,11 +26,14 @@ const Header = () => {
             <li>
                <NavLink to="/feed">Feed</NavLink>
             </li>
-            <li>
+            {user.id !== "guest" ? <li>
                <NavLink to="/profile">Profile</NavLink>
-            </li>
+            </li> : null}
             <li>
-               <NavLink to="/login">Sign In</NavLink>
+               {user.id !== "guest" ? <button onClick={() => {
+                  changeUser({ id: "guest" })
+                  history.push("/")
+               }}>Sign Out</button> : <NavLink to="/login">Sign In</NavLink>}
             </li>
          </ul>
          <form

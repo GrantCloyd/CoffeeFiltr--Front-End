@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
 
 const SignUpPage = () => {
    const [newSignUp, setNewSignUp] = useState({
@@ -7,17 +8,35 @@ const SignUpPage = () => {
       last_name: "",
       email: "",
       password: "",
+      avatar: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png",
+      bio: "Hi!",
    })
 
+   const history = useHistory()
+
    const handleSignUp = e => setNewSignUp({ ...newSignUp, [e.target.name]: e.target.value })
+
+   const handleNewUser = e => {
+      e.preventDefault()
+
+      fetch("http://localhost:9393/users",{
+         method: "POST",
+         headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+         },
+         body: JSON.stringify(newSignUp)
+      })
+      .then(response => response.json())
+      .then(output => {
+         history.push("/login")
+      })
+   }
 
    return (
       <div>
          <form
-            onSubmit={e => {
-               e.preventDefault()
-               console.log(newSignUp)
-            }}>
+            onSubmit={handleNewUser}>
             <input
                value={newSignUp.username}
                onChange={handleSignUp}
