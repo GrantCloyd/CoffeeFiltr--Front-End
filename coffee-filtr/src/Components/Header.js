@@ -35,8 +35,7 @@ const Header = () => {
                e.preventDefault()
                if (!query) {
                   history.push(`/search/${type}/All`)
-               }
-               else {
+               } else {
                   history.push(`/search/${type}/${query}`)
                }
             }}>
@@ -57,6 +56,7 @@ const Header = () => {
                type="text"
                placeholder="Search coffee..."
             />
+
             <button>Search</button>
          </form>
       </div>
