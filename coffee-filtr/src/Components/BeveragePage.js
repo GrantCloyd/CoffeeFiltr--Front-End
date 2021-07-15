@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react"
 import Review from "./Review"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { GlobalContext } from '../Context/GlobalState'
 
 function BeveragePage() {
    const coffeeId = useParams().id
 
    const { beverages, updateBeverages } = useContext(GlobalContext)
+
+   const history = useHistory()
 
    let beverage = [];
 
@@ -74,6 +76,7 @@ function BeveragePage() {
 
    return (
       <div>
+         <button onClick={() => history.goBack()}>Back</button>
          <h2>{title}</h2>
          <img src={img_url} />
          <p>{description}</p>

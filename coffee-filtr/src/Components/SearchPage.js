@@ -10,36 +10,41 @@ const SearchPage = () => {
    const [filteredArr, setFilteredArr] = useState([])
 
    const { beverages } = useContext(GlobalContext)
-
-   let queried = beverages[0].filter(bev => {
-      return bev.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
-   })
-
-   if (query === "All") {
-      queried = beverages[0]
-   }
-
+   
    let typed = []
+   let finalArr = [];
 
-   switch (type) {
-      case "Hot":
-         typed = queried.filter(item => item.hot)
-         break
-      case "Cold":
-         typed = queried.filter(item => !item.hot)
-         break
-      case "Espresso":
-         typed = queried.filter(
-            item => item.ingredients.map(ing => ing.name).indexOf("Espresso") !== -1
-         )
-         break
-      case "Non-espresso":
-         typed = queried.filter(
-            item => item.ingredients.map(ing => ing.name).indexOf("Espresso") == -1
-         )
-         break
-      default:
-         typed = queried
+   if (beverages.length !== 0) {
+      let queried = beverages[0].filter(bev => {
+         return bev.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
+      })
+
+      if (query === "All") {
+         queried = beverages[0]
+      }
+   
+      switch (type) {
+         case "Hot":
+            typed = queried.filter(item => item.hot)
+            break
+         case "Cold":
+            typed = queried.filter(item => !item.hot)
+            break
+         case "Espresso":
+            typed = queried.filter(
+               item => item.ingredients.map(ing => ing.name).indexOf("Espresso") !== -1
+            )
+            break
+         case "Non-espresso":
+            typed = queried.filter(
+               item => item.ingredients.map(ing => ing.name).indexOf("Espresso") == -1
+            )
+            break
+         default:
+            typed = queried
+      }
+   
+      finalArr = typed.map(item => <Coffee key={item.id} data={item} />)
    }
 
    const filterByOption = option => {
@@ -69,8 +74,6 @@ const SearchPage = () => {
 
       setFilteredArr(filtered)
    }
-
-   let finalArr = typed.map(item => <Coffee key={item.id} data={item} />)
 
    return (
       <div>
