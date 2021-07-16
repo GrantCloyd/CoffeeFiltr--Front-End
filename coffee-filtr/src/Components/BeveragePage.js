@@ -76,6 +76,13 @@ function BeveragePage() {
 
          updateBeverages(updatedBeverage)
       })
+      setNewReview({
+         title: "",
+         content: "",
+         rating: 0,
+         user_id: user.id,
+         beverage_id: coffeeId
+      })
    }
 
    const handleFav = () => {
