@@ -11,7 +11,7 @@ import LoginPage from "./Components/LoginPage"
 import SignUpPage from "./Components/SignUpPage"
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
-import { useEffect, useState } from "react"
+// import { useEffect, useState } from "react"
 import { Provider }from './Context/GlobalState'
 
 function App() {

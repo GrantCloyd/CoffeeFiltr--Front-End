@@ -37,7 +37,7 @@ const SearchPage = () => {
             break
          case "Non-espresso":
             typed = queried.filter(
-               item => item.ingredients.map(ing => ing.name).indexOf("Espresso") == -1
+               item => item.ingredients.map(ing => ing.name).indexOf("Espresso") === -1
             )
             break
          default:
@@ -59,7 +59,6 @@ const SearchPage = () => {
          result = [...result, update]
       }
 
-      console.log(result)
       const uniqueArray = result.flat().reduce((filter, current) => {
          let dk = filter.find(item => item.title === current.title)
          if (!dk) {
@@ -69,7 +68,6 @@ const SearchPage = () => {
          }
       }, [])
 
-      console.log(uniqueArray)
       let filtered = uniqueArray.map(item => <Coffee key={item.id} data={item} />)
 
       setFilteredArr(filtered)
@@ -78,12 +76,12 @@ const SearchPage = () => {
    return (
       <div>
          <h2>Search Coffee</h2>
-         <span>Sort by: </span>
+         {/* <span>Sort by: </span>
          <select>
             <option>A-Z</option>
             <option>Rating</option>
             <option>Favorited</option>
-         </select>
+         </select> */}
          <span>Filter by:</span>
          <label htmlFor="sweet"> Sweet </label>
          <input

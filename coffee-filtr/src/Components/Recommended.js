@@ -1,5 +1,4 @@
 import React from "react"
-import Coffee from "./Coffee"
 import { Grid } from "@material-ui/core"
 
 const Recommended = () => {

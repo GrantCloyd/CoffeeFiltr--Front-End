@@ -1,13 +1,24 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import { GlobalContext } from "../Context/GlobalState"
 import { Button } from "@material-ui/core"
+import { useHistory } from "react-router-dom"
+import Coffee from "./Coffee"
+import { Grid } from "@material-ui/core"
 
 const ProfilePage = () => {
-   const { user, changeUser } = useContext(GlobalContext)
+   const { beverages, user, changeUser } = useContext(GlobalContext)
    const { username, first_name, last_name, email, bio } = user
    const [isToggled, setToggle] = useState(false)
 
    const [updateUser, setUpdateUser] = useState(user)
+
+   const history = useHistory()
+
+   useEffect(() => {
+   if (user.id === "guest") {
+      history.push("/")
+   }
+   }, [user.id, history])
 
    const handleUpdates = e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })
 
@@ -26,8 +37,16 @@ const ProfilePage = () => {
          .then(setToggle(false))
    }
 
+   const reviewedBevs = beverages.length === 0 ? [] : beverages[0].filter(bev => bev.reviews.some(item => item.user_id === user.id))
+
+   const reviewedBevsArr = reviewedBevs.map(bev => <Coffee key={bev.id} data={bev} />)
+
+   const favedBevs = beverages.length === 0 ? [] : beverages[0].filter(bev => bev.favorites.some(item => item.user_id === user.id))
+
+   const favedBevsArr = favedBevs.map(bev => <Coffee key={bev.id} data={bev} />)
+
    return (
-      <div className="bottom-div">
+      <div className="bottom-div-2">
          <h2>Dashboard</h2>
          <img className="avatar" alt="User Avatar" src={user.avatar} />
          {isToggled ? (
@@ -134,9 +153,15 @@ const ProfilePage = () => {
          </Button>
 
          {/* Username, first/last name, bio, email, change password, edit profile */}
-         <h3>Your Reviews</h3>
+         <h3>You Reviewed</h3>
+         <Grid container spacing={3}>
+            {reviewedBevsArr}
+         </Grid>
          <h3>Favorited Beverages</h3>
-         <h3>Preferences</h3>
+         <Grid container spacing={3}>
+            {favedBevsArr}
+         </Grid>
+         {/* <h3>Preferences</h3> */}
          {/* Display current preferences */}
          {/* Option to delete preferences */}
          {/* Add preferences through dropdown */}

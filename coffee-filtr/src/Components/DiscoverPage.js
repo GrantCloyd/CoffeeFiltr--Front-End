@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react"
 import Coffee from "./Coffee"
-import Recommended from "./Recommended"
+// import Recommended from "./Recommended"
 import { Grid } from "@material-ui/core"
 import { GlobalContext } from "../Context/GlobalState"
 
@@ -12,7 +12,7 @@ const DiscoverPage = () => {
    useEffect(() => {
       fetch("http://localhost:9393/thumbnail_data")
          .then(response => response.json())
-         .then(setCoffeeData)
+         .then(setCoffeeData) 
    }, [])
 
    const randomizer = () => Math.floor(Math.random() * coffeeData.length)
@@ -25,13 +25,14 @@ const DiscoverPage = () => {
    }
 
    return (
-      <div>
+      <div className="bottom-div">
          {user.id !== "guest" ? <h3>Welcome, {user.username}</h3> : <h3>Welcome!</h3>}
          <h2>Home</h2>
          <h3>Coffee of the Day</h3>
          <div id="COTD">
             <Coffee data={coffeeOfDay} />
          </div>
+         <br />
          <h3>Recommended Coffee</h3>
          <Grid container spacing={3}>
             {[

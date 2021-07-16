@@ -28,7 +28,11 @@ const Review = ({review: { id, title, content, rating, user: reviewUser, likes }
       }
    }
 
-   let isUserReviewed = (id === user.id) && user.id !== "guest"
+   if (reviewUser === undefined) {
+      reviewUser = {id: "guest"}
+   }
+
+   let isUserReviewed = (reviewUser.id === user.id) && user.id !== "guest"
 
    const handleDelete = () => {
       fetch("http://localhost:9393/reviews/" + id, {
@@ -46,7 +50,7 @@ const Review = ({review: { id, title, content, rating, user: reviewUser, likes }
          <h5>{content}</h5>
          <p>Likes : {likes ? likes.length : 0}</p>
          <button onClick={handleLike}>Like</button>
-         {isUserReviewed ? <button onClick={handleDelete}>Delete</button> : null}
+         {isUserReviewed || user.username === "Admin" ? <button onClick={handleDelete}>Delete</button> : null}
       </div>
    )
 }

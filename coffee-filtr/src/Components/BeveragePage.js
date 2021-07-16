@@ -103,20 +103,22 @@ function BeveragePage() {
       <div className="bottom-div-2">
          <br />
          <button onClick={() => history.goBack()}>Back</button>
+         <br /><br />
+         <button onClick={handleFav}>{isFav ? "♥ Remove" : "♡ Favorite"}</button>
          <h2>{title}</h2>
-         <img src={img_url} />
+         <img alt={title} src={img_url} />
          <p>{description}</p>
          <p>Ingredients: {ingredients.map(ing => ing.name).join(", ")}</p>
          <p>{hot ? "Hot!🔥" : "Cold 🧊"}</p>
-         <button onClick={handleFav}>{isFav ? "Remove Favorite": "Add Favorite"}</button>
-         <ul>
+         {/* <ul>
             Favorited by:
             <li>Users display (link to users?)</li>
             <li>Users display (link to users?)</li>
-         </ul>
+         </ul> */}
          <hr />
          <h4>Reviews</h4>
          {reviewsArr}
+         <br />
          <hr />
          <h4>Add Review</h4>
          <form

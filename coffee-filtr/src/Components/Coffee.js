@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+// import React, { useState } from "react"
 import { Link } from "react-router-dom"
 import { Card, CardContent, Grid } from "@material-ui/core"
 
@@ -31,7 +31,7 @@ const Coffee = ({ data }) => {
 
 export default Coffee
 
-{
+
    /* <Link to={`/${pathname}`}>
 <img
    className="showImage"
@@ -47,4 +47,4 @@ export default Coffee
 <Button variant="contained" color="primary" onClick={() => handleFavorite(item)}>
 {favoriteStatus ? "♡ Favorite" : "♥ Remove"}
 </Button>  */
-}
+
