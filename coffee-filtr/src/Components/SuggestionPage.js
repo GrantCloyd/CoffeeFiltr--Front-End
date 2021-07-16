@@ -26,7 +26,9 @@ const SuggestionPage = () => {
 
    //might need to make a separate state for ease of fetch post for ingredients (set components?)
 
-   const suggestedBevArr = beverages[0].filter(bev =>
+   const beveragesArr = beverages.length === 0 ? beverages : beverages[0];
+
+   const suggestedBevArr = beveragesArr.filter(bev =>
       bev.ingredients.every(i => {
          return suggestCoffeeIng.includes(i.name)
       })
@@ -87,7 +89,7 @@ const SuggestionPage = () => {
    }
 
    return (
-      <div className="bottom-div">
+      <div className="bottom-div-2">
          <h2>Make Your Own Coffee</h2>
          <h3>What Ingredients do you Have?</h3>
          <form

@@ -51,6 +51,11 @@ img.avatar {
    padding-bottom: 8%;
 }
 
+.bottom-div-2 {
+   padding-top: 30px;
+   padding-bottom: 15%;
+}
+
 #COTD {
    display: flex;
    justify-content: center;

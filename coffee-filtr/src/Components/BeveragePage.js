@@ -6,9 +6,11 @@ import { GlobalContext } from '../Context/GlobalState'
 function BeveragePage() {
    const coffeeId = useParams().id
 
-   const { beverages, updateBeverages } = useContext(GlobalContext)
+   const { user, beverages, updateBeverages } = useContext(GlobalContext)
 
    const history = useHistory()
+
+   let isFav = false;
 
    let beverage = [];
 
@@ -16,13 +18,15 @@ function BeveragePage() {
       beverage = beverages[0].find(bev => {
          return bev.id === +coffeeId
       })
+
+      isFav = beverage.favorites.map(fav => fav.user_id).includes(user.id)
    }
 
    const [newReview, setNewReview] = useState({
       title: "",
       content: "",
       rating: 0,
-      user_id: 1,
+      user_id: user.id,
       beverage_id: coffeeId
    })
 
@@ -49,7 +53,7 @@ function BeveragePage() {
          return (
             <Review
                key={review.id}
-               review={review}
+               review={review}   
             />
          )
       })
@@ -74,15 +78,37 @@ function BeveragePage() {
       })
    }
 
+   const handleFav = () => {
+      const favObj = {
+         beverage_id: coffeeId,
+         user_id: user.id
+      }
+
+      if (user.id === "guest") {
+         alert("Please login to favorite")
+      } else {
+         fetch("http://localhost:9393/favorites", {
+            method: "POST",
+            headers: {
+               "Content-Type": "application/json"
+            },
+            body: JSON.stringify(favObj)
+         })
+         .then(res => res.json())
+         .then(updateBeverages)
+      }
+   }
+
    return (
-      <div>
+      <div className="bottom-div-2">
+         <br />
          <button onClick={() => history.goBack()}>Back</button>
          <h2>{title}</h2>
          <img src={img_url} />
          <p>{description}</p>
          <p>Ingredients: {ingredients.map(ing => ing.name).join(", ")}</p>
          <p>{hot ? "Hot!🔥" : "Cold 🧊"}</p>
-         <button>Add Favorite!</button>
+         <button onClick={handleFav}>{isFav ? "Remove Favorite": "Add Favorite"}</button>
          <ul>
             Favorited by:
             <li>Users display (link to users?)</li>

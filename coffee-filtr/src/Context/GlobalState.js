@@ -17,10 +17,6 @@ export const Provider = ({ children }) => {
          .then(data => {
             dispatch({ type: "SET_Beverages", payload: data })
          })
-      // fetch("http://localhost:9393/reviews")
-      //     .then(response => response.json())
-      //    .then(data => {
-      //        dispatch({ type: 'SET_Reviews', payload: data })})
    }, [])
 
    function changeUser(newUser) {
