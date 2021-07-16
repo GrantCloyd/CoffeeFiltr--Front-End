@@ -32,14 +32,23 @@ img.avatar {
    object-fit: cover;
 }
 
-#cfLogo {
+.header-content {
    width: 150px;
    height: 150px;
-   float: left;
+   position: absolute;
+   top: 3%;
+   left: 5%;
    border-radius: 50%;
-   margin-left: 5%;
+   display: inline-block; 
+   overflow: hidden; 
+}
 
-   margin-top: 1.75%;
+#cfLogo {
+   position: absolute;
+   width: 250px;
+   height: 250px;
+   right: -33%;
+   top: -33%;
 }
 
 .header {
@@ -144,10 +153,6 @@ ul {
    color: white;
    font-weight: bold;
    opacity: 0.95;
-}
-
-.menu {
-   margin-right: 7%;
 }
 
 .centerReview {

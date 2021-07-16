@@ -16,7 +16,9 @@ const Header = () => {
 
    return (
       <header className="header">
-         <img id="cfLogo" alt="cfLogo" src="https://i.imgur.com/d2hK8tg.png" />
+         <div className="header-content">
+          <img id="cfLogo" alt="cfLogo" src="https://i.imgur.com/d2hK8tg.png" />
+         </div>
          <div className="menu">
             <h1>CoffeeFiltr</h1>
             <br />
