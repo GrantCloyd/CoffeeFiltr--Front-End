@@ -6,8 +6,12 @@
    min-height: 100vh;
 }
 
-.App-link {
-   color: #61dafb;
+h1 {
+   margin-top: 0px;
+   margin-bottom: 0;
+   font-family: "Amatic SC", cursive;
+   font-size: 100px;
+   color: #0a4178;
 }
 
 img {
@@ -28,25 +32,37 @@ img.avatar {
    object-fit: cover;
 }
 
+#cfLogo {
+   width: 150px;
+   height: 150px;
+   float: left;
+   border-radius: 50%;
+   margin-left: 5%;
+
+   margin-top: 1.75%;
+}
+
 .header {
    padding-top: 10px;
    padding-bottom: 20px;
    background-image: url("https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
    background-position: center;
-   opacity: 0.8;
+   opacity: 0.9;
 }
 
 .footer {
    padding-top: 10px;
    background-image: url("https://images.pexels.com/photos/585750/pexels-photo-585750.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
    background-position: center;
-   opacity: 0.8;
+   opacity: 0.9;
    width: 100%;
    position: absolute;
    bottom: 0;
+   font-weight: bold;
 }
 
-.bottom-div, .MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 {
+.bottom-div,
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 {
    padding-top: 30px;
    padding-bottom: 8%;
 }
@@ -61,11 +77,12 @@ img.avatar {
    justify-content: center;
 }
 
-.signup-form, .checkbox {
+.signup-form,
+.checkbox {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   width:200px;
+   width: 200px;
    margin: 0 auto;
 }
 
@@ -73,7 +90,7 @@ img.avatar {
    display: flex;
    flex-direction: column;
    justify-content: center;
-   width:300px;
+   width: 300px;
    margin: 0 auto;
 }
 
@@ -84,14 +101,14 @@ label {
 select {
    padding: 9px 9px;
    border: none;
-   border:solid 1px #ccc;
+   border: solid 1px #ccc;
    border-radius: 2px;
 }
 
 input {
    padding: 10px 9px;
    border: none;
-   border:solid 1px #ccc;
+   border: solid 1px #ccc;
    border-radius: 2px;
 }
 
@@ -101,7 +118,7 @@ input {
 
 ul {
    padding: 0;
-    list-style-type: none;
+   list-style-type: none;
 }
 
 .header-ul {
@@ -112,4 +129,27 @@ ul {
    justify-content: space-between;
 }
 
+.review {
+   border: 10px solid #eed8c0;
+   /* background-image: url("https://media.istockphoto.com/photos/white-foam-picture-id538533607"); */
+   background-color: rgb(241, 239, 239);
+   padding-bottom: 10px;
+   border-radius: 15% 15% 50% 50%;
+   width: 55%;
+   margin: auto;
+}
 
+.MuiButtonBase-root.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary {
+   background-color: #0a4178;
+   color: white;
+   font-weight: bold;
+   opacity: 0.95;
+}
+
+.menu {
+   margin-right: 7%;
+}
+
+.centerReview {
+   margin: auto;
+}

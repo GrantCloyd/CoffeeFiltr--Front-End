@@ -10,9 +10,9 @@ const SearchPage = () => {
    const [filteredArr, setFilteredArr] = useState([])
 
    const { beverages } = useContext(GlobalContext)
-   
+
    let typed = []
-   let finalArr = [];
+   let finalArr = []
 
    if (beverages.length !== 0) {
       let queried = beverages[0].filter(bev => {
@@ -22,7 +22,7 @@ const SearchPage = () => {
       if (query === "All") {
          queried = beverages[0]
       }
-   
+
       switch (type) {
          case "Hot":
             typed = queried.filter(item => item.hot)
@@ -43,7 +43,7 @@ const SearchPage = () => {
          default:
             typed = queried
       }
-   
+
       finalArr = typed.map(item => <Coffee key={item.id} data={item} />)
    }
 
@@ -76,12 +76,7 @@ const SearchPage = () => {
    return (
       <div>
          <h2>Search Coffee</h2>
-         {/* <span>Sort by: </span>
-         <select>
-            <option>A-Z</option>
-            <option>Rating</option>
-            <option>Favorited</option>
-         </select> */}
+
          <span>Filter by:</span>
          <label htmlFor="sweet"> Sweet </label>
          <input
@@ -108,7 +103,7 @@ const SearchPage = () => {
             name="alcohol"
          />
 
-         <Grid container spacing={3}>
+         <Grid justifyContent="center" container spacing={3}>
             {isFiltered ? filteredArr : finalArr}
          </Grid>
       </div>

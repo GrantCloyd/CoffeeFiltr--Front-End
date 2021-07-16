@@ -15,9 +15,9 @@ const ProfilePage = () => {
    const history = useHistory()
 
    useEffect(() => {
-   if (user.id === "guest") {
-      history.push("/")
-   }
+      if (user.id === "guest") {
+         history.push("/")
+      }
    }, [user.id, history])
 
    const handleUpdates = e => setUpdateUser({ ...updateUser, [e.target.name]: e.target.value })
@@ -37,11 +37,17 @@ const ProfilePage = () => {
          .then(setToggle(false))
    }
 
-   const reviewedBevs = beverages.length === 0 ? [] : beverages[0].filter(bev => bev.reviews.some(item => item.user_id === user.id))
+   const reviewedBevs =
+      beverages.length === 0
+         ? []
+         : beverages[0].filter(bev => bev.reviews.some(item => item.user_id === user.id))
 
    const reviewedBevsArr = reviewedBevs.map(bev => <Coffee key={bev.id} data={bev} />)
 
-   const favedBevs = beverages.length === 0 ? [] : beverages[0].filter(bev => bev.favorites.some(item => item.user_id === user.id))
+   const favedBevs =
+      beverages.length === 0
+         ? []
+         : beverages[0].filter(bev => bev.favorites.some(item => item.user_id === user.id))
 
    const favedBevsArr = favedBevs.map(bev => <Coffee key={bev.id} data={bev} />)
 
@@ -50,7 +56,7 @@ const ProfilePage = () => {
          <h2>Dashboard</h2>
          <img className="avatar" alt="User Avatar" src={user.avatar} />
          {isToggled ? (
-            <form  onSubmit={submitUpdate}>
+            <form onSubmit={submitUpdate}>
                <ul className="signup-form">
                   <br />
                   <li>
@@ -138,13 +144,21 @@ const ProfilePage = () => {
          ) : (
             <ul className="signup-form-2">
                <br />
-               <li><strong>Username:</strong> {username}</li>
+               <li>
+                  <strong>Username:</strong> {username}
+               </li>
                <br />
-               <li><strong>Name :</strong> {first_name + " " + last_name}</li>
+               <li>
+                  <strong>Name :</strong> {first_name + " " + last_name}
+               </li>
                <br />
-               <li><strong>Email :</strong> {email}</li>
+               <li>
+                  <strong>Email :</strong> {email}
+               </li>
                <br />
-               <li><strong>About Me :</strong> {bio}</li>
+               <li>
+                  <strong>About Me :</strong> {bio}
+               </li>
             </ul>
          )}
          <br />
@@ -154,11 +168,13 @@ const ProfilePage = () => {
 
          {/* Username, first/last name, bio, email, change password, edit profile */}
          <h3>You Reviewed</h3>
-         <Grid container spacing={3}>
-            {reviewedBevsArr}
-         </Grid>
+         <div className="centerReview">
+            <Grid justifyContent="center" container spacing={3}>
+               {reviewedBevsArr}
+            </Grid>
+         </div>
          <h3>Favorited Beverages</h3>
-         <Grid container spacing={3}>
+         <Grid justifyContent="center" container spacing={3}>
             {favedBevsArr}
          </Grid>
          {/* <h3>Preferences</h3> */}

@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react"
 import Review from "./Review"
 import { useParams, useHistory } from "react-router-dom"
-import { GlobalContext } from '../Context/GlobalState'
+import { GlobalContext } from "../Context/GlobalState"
+import { Button } from "@material-ui/core"
 
 function BeveragePage() {
    const coffeeId = useParams().id
@@ -10,9 +11,9 @@ function BeveragePage() {
 
    const history = useHistory()
 
-   let isFav = false;
+   let isFav = false
 
-   let beverage = [];
+   let beverage = []
 
    if (beverages.length !== 0) {
       beverage = beverages[0].find(bev => {
@@ -27,19 +28,19 @@ function BeveragePage() {
       content: "",
       rating: 0,
       user_id: user.id,
-      beverage_id: coffeeId
+      beverage_id: coffeeId,
    })
 
-   let { title, description, img_url, hot, ingredients, reviews} = {
+   let { title, description, img_url, hot, ingredients, reviews } = {
       title: "",
       description: "",
       img_url: "",
       hot: false,
       ingredients: [],
-      reviews: []
+      reviews: [],
    }
 
-   let reviewsArr = [];
+   let reviewsArr = []
 
    if (beverage !== undefined && beverage.length !== 0) {
       title = beverage.title
@@ -50,14 +51,9 @@ function BeveragePage() {
       reviews = beverage.reviews
 
       reviewsArr = reviews.map(review => {
-         return (
-            <Review
-               key={review.id}
-               review={review}   
-            />
-         )
+         return <Review key={review.id} review={review} />
       })
-      }
+   }
 
    const handleSubmitReview = e => {
       e.preventDefault()
@@ -65,30 +61,30 @@ function BeveragePage() {
       fetch("http://localhost:9393/reviews", {
          method: "POST",
          headers: {
-            "Accept": "application/json",
+            Accept: "application/json",
             "Content-Type": "application/json",
          },
-         body: JSON.stringify(newReview)
-    })
-      .then(response => response.json())
-      .then(json => {
-         const updatedBeverage = {...beverage, reviews: [...reviews, json]}
-
-         updateBeverages(updatedBeverage)
+         body: JSON.stringify(newReview),
       })
+         .then(response => response.json())
+         .then(json => {
+            const updatedBeverage = { ...beverage, reviews: [...reviews, json] }
+
+            updateBeverages(updatedBeverage)
+         })
       setNewReview({
          title: "",
          content: "",
          rating: 0,
          user_id: user.id,
-         beverage_id: coffeeId
+         beverage_id: coffeeId,
       })
    }
 
    const handleFav = () => {
       const favObj = {
          beverage_id: coffeeId,
-         user_id: user.id
+         user_id: user.id,
       }
 
       if (user.id === "guest") {
@@ -97,21 +93,26 @@ function BeveragePage() {
          fetch("http://localhost:9393/favorites", {
             method: "POST",
             headers: {
-               "Content-Type": "application/json"
+               "Content-Type": "application/json",
             },
-            body: JSON.stringify(favObj)
+            body: JSON.stringify(favObj),
          })
-         .then(res => res.json())
-         .then(updateBeverages)
+            .then(res => res.json())
+            .then(updateBeverages)
       }
    }
 
    return (
       <div className="bottom-div-2">
          <br />
-         <button onClick={() => history.goBack()}>Back</button>
-         <br /><br />
-         <button onClick={handleFav}>{isFav ? "♥ Remove" : "♡ Favorite"}</button>
+         <Button type="submit" color="primary" variant="contained" onClick={() => history.goBack()}>
+            Back
+         </Button>
+         <br />
+         <br />
+         <Button type="submit" color="primary" variant="contained" onClick={handleFav}>
+            {isFav ? "♥ Remove" : "♡ Favorite"}
+         </Button>
          <h2>{title}</h2>
          <img alt={title} src={img_url} />
          <p>{description}</p>
@@ -128,8 +129,7 @@ function BeveragePage() {
          <br />
          <hr />
          <h4>Add Review</h4>
-         <form
-            onSubmit={handleSubmitReview}>
+         <form onSubmit={handleSubmitReview}>
             <input
                onChange={e => setNewReview({ ...newReview, title: e.target.value })}
                value={newReview.title}
@@ -137,6 +137,7 @@ function BeveragePage() {
                type="text"
                placeholder="Title"
             />
+            <br />
             <input
                onChange={e => setNewReview({ ...newReview, content: e.target.value })}
                value={newReview.content}
@@ -144,6 +145,8 @@ function BeveragePage() {
                type="textarea"
                placeholder="Content"
             />
+            <br />
+            <label htmlFor="rating">Rating: &nbsp;</label>
             <select
                onChange={e => setNewReview({ ...newReview, rating: e.target.value })}
                name="rating"
@@ -160,7 +163,11 @@ function BeveragePage() {
                <option>9</option>
                <option>10</option>
             </select>
-            <button>Submit</button>
+            <br />
+            <br />
+            <Button type="submit" color="primary" variant="contained">
+               Submit
+            </Button>
          </form>
       </div>
    )

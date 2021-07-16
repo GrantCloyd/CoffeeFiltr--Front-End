@@ -13,7 +13,7 @@ const SuggestionPage = () => {
       description: "",
       img_url: "",
       ingredients: [],
-      hot: true,
+      hot: false,
    })
 
    useEffect(() => {
@@ -26,7 +26,7 @@ const SuggestionPage = () => {
 
    //might need to make a separate state for ease of fetch post for ingredients (set components?)
 
-   const beveragesArr = beverages.length === 0 ? beverages : beverages[0];
+   const beveragesArr = beverages.length === 0 ? beverages : beverages[0]
 
    const suggestedBevArr = beveragesArr.filter(bev =>
       bev.ingredients.every(i => {
@@ -86,6 +86,8 @@ const SuggestionPage = () => {
       fetch("http://localhost:9393/beverages_post", configObj)
          .then(response => response.json())
          .then(addBeverage)
+      setNewCoffee({ title: "", description: "", img_url: "", ingredients: [], hot: false })
+      setTimeout(() => alert("Your new beverage is being prepared!"), 400)
    }
 
    return (
@@ -109,7 +111,7 @@ const SuggestionPage = () => {
          <ul>{suggestIngredArr}</ul>
 
          <h3>Suggested Coffee</h3>
-         <Grid container spacing={3}>
+         <Grid justifyContent="center" container spacing={3}>
             {suggestedCoffeeCards}
          </Grid>
 
@@ -132,7 +134,7 @@ const SuggestionPage = () => {
                name="description"
                placeholder="Enter Description ..."
             />
-             <br />
+            <br />
             <label htmlFor="img_url">Image</label>
             <input
                onChange={handleNewCoffee}
@@ -141,7 +143,7 @@ const SuggestionPage = () => {
                name="img_url"
                placeholder="Enter Image ..."
             />
-             <br />
+            <br />
             <label htmlFor="ingredients">Ingredients</label>
             <select
                onChange={handleNewCoffeeIngredient}
@@ -151,7 +153,7 @@ const SuggestionPage = () => {
             </select>
             <br />
             <label htmlFor="hot">Hot?</label>
-            <input 
+            <input
                className="checkbox"
                onChange={handleNewCoffeeCheck}
                value={newCoffee.hot}
