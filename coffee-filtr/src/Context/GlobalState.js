@@ -3,7 +3,7 @@ import AppReducer from "./AppReducer"
 // Initial State
 const initialState = {
    beverages: [],
-   user: {id: "guest"}
+   user: { id: "guest" },
 }
 
 export const GlobalContext = createContext(initialState)
@@ -30,24 +30,6 @@ export const Provider = ({ children }) => {
       dispatch({ type: "ADD_BEVERAGE", payload: beverage })
    }
 
-   // function addReview(review) {
-   //     dispatch({ type: 'ADD_REVIEW', payload: review })
-   // }
-
-   // function deleteTransaction(id) {
-   //     dispatch({
-   //         type: "DELETE",
-   //         payload: id
-   //     })
-   // }
-
-   // function addTransaction(transaction) {
-   //     dispatch({
-   //         type: "ADD_TRANSACTION",
-   //         payload: transaction
-   //     })
-   // }
-
    return (
       <GlobalContext.Provider
          value={{
@@ -55,7 +37,7 @@ export const Provider = ({ children }) => {
             updateBeverages,
             addBeverage,
             changeUser,
-            user: state.user
+            user: state.user,
          }}>
          {children}
       </GlobalContext.Provider>

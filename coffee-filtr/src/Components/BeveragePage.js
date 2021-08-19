@@ -118,11 +118,7 @@ function BeveragePage() {
          <p>{description}</p>
          <p>Ingredients: {ingredients.map(ing => ing.name).join(", ")}</p>
          <p>{hot ? "Hot!🔥" : "Cold 🧊"}</p>
-         {/* <ul>
-            Favorited by:
-            <li>Users display (link to users?)</li>
-            <li>Users display (link to users?)</li>
-         </ul> */}
+
          <hr />
          <h4>Reviews</h4>
          {reviewsArr}

@@ -17,7 +17,7 @@ const Header = () => {
    return (
       <header className="header">
          <div className="header-content">
-          <img id="cfLogo" alt="cfLogo" src="https://i.imgur.com/d2hK8tg.png" />
+            <img id="cfLogo" alt="cfLogo" src="https://i.imgur.com/d2hK8tg.png" />
          </div>
          <div className="menu">
             <h1>CoffeeFiltr</h1>
@@ -38,14 +38,7 @@ const Header = () => {
                      </Button>
                   </NavLink>
                </li>
-               <li>
-                  <NavLink to="/feed">
-                     {" "}
-                     <Button type="submit" color="primary" variant="contained">
-                        Feed{" "}
-                     </Button>
-                  </NavLink>
-               </li>
+
                {user.id !== "guest" ? (
                   <li>
                      <NavLink to="/profile">

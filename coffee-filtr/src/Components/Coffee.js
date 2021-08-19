@@ -30,21 +30,3 @@ const Coffee = ({ data }) => {
 }
 
 export default Coffee
-
-
-   /* <Link to={`/${pathname}`}>
-<img
-   className="showImage"
-   alt={name}
-   src={image.medium}
-/>
-
-<h4 className="name">{name}</h4>
-</Link>
-
-{rating.average ? <p>⭐️&nbsp;&nbsp;{rating.average}</p> : <p> ⭐️ Not Rated</p>}
-
-<Button variant="contained" color="primary" onClick={() => handleFavorite(item)}>
-{favoriteStatus ? "♡ Favorite" : "♥ Remove"}
-</Button>  */
-
