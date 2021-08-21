@@ -21,7 +21,9 @@ In the project directory, you can run:
 Runs the app in the development mode.
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-##Acknowledgements 
+## Acknowledgements 
+
+This project is the product of a pair programming project with @Anchobies
 
 This was built using Material UI's core components and React-Router. The logo was created with Canva's online tools. 
 
