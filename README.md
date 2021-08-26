@@ -11,7 +11,7 @@
 
 A fun way to explore and find new coffee beverages. Discover, favorite, sort and filter coffee beverages by ingredients and see what you can make your own based on what you have on hand.
 
-To see the rails half of this project please view the [back-end repo here](https://github.com/GrantCloyd/CoffeeFiltr-Backend).
+To see the rails half of this project, please view the [back-end repo here](https://github.com/GrantCloyd/CoffeeFiltr-Backend).
 
 
 In the project directory, you can run:
