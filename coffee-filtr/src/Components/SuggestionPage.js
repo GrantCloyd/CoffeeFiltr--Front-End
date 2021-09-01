@@ -8,6 +8,7 @@ const SuggestionPage = () => {
    const { beverages, addBeverage } = useContext(GlobalContext)
    const [ingredients, setIngredients] = useState([])
    const [suggestCoffeeIng, setSuggestCoffeeIng] = useState([])
+   const [errors, setErrors] = useState(false)
    const [newCoffee, setNewCoffee] = useState({
       title: "",
       description: "",
@@ -48,12 +49,27 @@ const SuggestionPage = () => {
    }
 
    const suggestIngredArr = suggestCoffeeIng.map(ing => (
-      <li onClick={() => removeSuggestIng(ing)} key={ing}>
-         {ing}
-      </li>
+      <>
+         <li key={ing}>
+            {ing} &nbsp;
+            <Button
+               type="submit"
+               color="primary"
+               variant="outlined"
+               onClick={() => removeSuggestIng(ing)}>
+               Remove
+            </Button>
+         </li>
+         <br />
+      </>
    ))
 
    function handleNewSuggestIngredient(e) {
+      setErrors(false)
+      if (suggestCoffeeIng.includes(e.target.value)) {
+         setErrors("Already included - please select a different item")
+         return
+      }
       setSuggestCoffeeIng([...suggestCoffeeIng, e.target.value])
    }
 
@@ -69,7 +85,7 @@ const SuggestionPage = () => {
    const handleNewCoffeeCheck = e =>
       setNewCoffee({ ...newCoffee, [e.target.name]: e.target.checked })
 
-   const submitCoffee = e => {
+   async function submitCoffee(e) {
       e.preventDefault()
 
       let configObj = {
@@ -80,12 +96,13 @@ const SuggestionPage = () => {
          },
          body: JSON.stringify(newCoffee),
       }
-      console.log(newCoffee)
-      console.log(configObj)
 
-      fetch("http://localhost:9393/beverages_post", configObj)
-         .then(response => response.json())
-         .then(addBeverage)
+      const res = await fetch("http://localhost:9393/beverages_post", configObj)
+      const data = await res.json()
+      console.log(data)
+      if (data.id) {
+         //addBeverage
+      }
       setNewCoffee({ title: "", description: "", img_url: "", ingredients: [], hot: false })
       setTimeout(() => alert("Your new beverage is being prepared!"), 400)
    }
@@ -94,11 +111,13 @@ const SuggestionPage = () => {
       <div className="bottom-div-2">
          <h2>Make Your Own Coffee</h2>
          <h3>What Ingredients do you Have?</h3>
+         {errors && <p> {errors} </p>}
          <form
             onSubmit={e => {
                e.preventDefault()
                console.log(suggestCoffeeIng)
             }}>
+            <label htmlFor="ingredients"> Select: </label>
             <select
                onChange={handleNewSuggestIngredient}
                // value={newCoffee.ingredients}
@@ -115,7 +134,7 @@ const SuggestionPage = () => {
             {suggestedCoffeeCards}
          </Grid>
 
-         <h3>Add a coffee</h3>
+         {/* <h3>Add a coffee</h3>
          <form className="signup-form" onSubmit={submitCoffee}>
             <label htmlFor="title">Title</label>
             <input
@@ -166,7 +185,7 @@ const SuggestionPage = () => {
                Submit
             </Button>
          </form>
-         <ul>{ingredArr}</ul>
+         <ul>{ingredArr}</ul> */}
       </div>
    )
 }
